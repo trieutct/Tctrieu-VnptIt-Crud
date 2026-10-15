@@ -1,0 +1,10 @@
+<Solution>
+  <Project Path="Tctrieu.VnptIt.Crud.Api/Tctrieu.VnptIt.Crud.Api.csproj">
+    <BuildDependency Project="Tctrieu.VnptIt.Crud.Application/Tctrieu.VnptIt.Crud.Application.csproj" />
+    <BuildDependency Project="Tctrieu.VnptIt.Crud.Domain/Tctrieu.VnptIt.Crud.Domain.csproj" />
+    <BuildDependency Project="Tctrieu.VnptIt.Crud.Infrastructure/Tctrieu.VnptIt.Crud.Infrastructure.csproj" />
+  </Project>
+  <Project Path="Tctrieu.VnptIt.Crud.Application/Tctrieu.VnptIt.Crud.Application.csproj" />
+  <Project Path="Tctrieu.VnptIt.Crud.Domain/Tctrieu.VnptIt.Crud.Domain.csproj" Id="22b0b1de-073f-4461-8379-360f2c7993fd" />
+  <Project Path="Tctrieu.VnptIt.Crud.Infrastructure/Tctrieu.VnptIt.Crud.Infrastructure.csproj" Id="2864eafb-9f4f-43f7-a8b1-7a483f692c18" />
+</Solution>

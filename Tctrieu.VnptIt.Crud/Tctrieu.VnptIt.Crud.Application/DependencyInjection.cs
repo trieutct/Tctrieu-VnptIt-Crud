@@ -1,0 +1,22 @@
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Tctrieu.VnptIt.Crud.Application.Users;
+
+namespace Tctrieu.VnptIt.Crud.Application
+{
+    /// <summary>
+    /// Đăng ký service của tầng Application
+    /// </summary>
+    public static class DependencyInjection
+    {
+        public static IServiceCollection AddApplication(this IServiceCollection services)
+        {
+            services.AddScoped<IUserService, UserService>();
+            return services;
+        }
+    }
+}
