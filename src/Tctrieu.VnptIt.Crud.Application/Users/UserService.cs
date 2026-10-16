@@ -12,9 +12,7 @@ using Tctrieu.VnptIt.Crud.Domain.Entities;
 
 namespace Tctrieu.VnptIt.Crud.Application.Users
 {
-    /// <summary>
-    /// Xử lý nghiệp vụ User
-    /// </summary>
+    // Xử lý nghiệp vụ User
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
@@ -31,18 +29,14 @@ namespace Tctrieu.VnptIt.Crud.Application.Users
             _passwordHasher = passwordHasher;
         }
 
-        /// <summary>
-        /// Lấy chi tiết user
-        /// </summary>
+        // Lấy chi tiết user
         public async Task<UserDto> GetByIdAsync(int id, CancellationToken ct = default)
         {
             var user = await GetUserOrThrowAsync(id, ct);
             return UserDto.FromEntity(user);
         }
 
-        /// <summary>
-        /// Lấy danh sách user có lọc và phân trang
-        /// </summary>
+        // Lấy danh sách user có lọc và phân trang
         public async Task<PagedResult<UserDto>> GetListAsync(GetUsersQuery query, CancellationToken ct = default)
         {
             // Chuẩn hóa tham số phân trang
@@ -56,9 +50,7 @@ namespace Tctrieu.VnptIt.Crud.Application.Users
             return new PagedResult<UserDto>(dtos, totalCount, query.Page, query.PageSize);
         }
 
-        /// <summary>
-        /// Tạo user mới
-        /// </summary>
+        // Tạo user mới
         public async Task<UserDto> CreateAsync(CreateUserRequest request, CancellationToken ct = default)
         {
             // Kiểm tra trùng email
@@ -77,9 +69,7 @@ namespace Tctrieu.VnptIt.Crud.Application.Users
             return UserDto.FromEntity(user);
         }
 
-        /// <summary>
-        /// Cập nhật thông tin user
-        /// </summary>
+        // Cập nhật thông tin user
         public async Task<UserDto> UpdateAsync(int id, UpdateUserRequest request, CancellationToken ct = default)
         {
             var user = await GetUserOrThrowAsync(id, ct);
@@ -90,9 +80,7 @@ namespace Tctrieu.VnptIt.Crud.Application.Users
             return UserDto.FromEntity(user);
         }
 
-        /// <summary>
-        /// Mở khóa tài khoản
-        /// </summary>
+        // Mở khóa tài khoản
         public async Task ActivateAsync(int id, CancellationToken ct = default)
         {
             var user = await GetUserOrThrowAsync(id, ct);
@@ -101,9 +89,7 @@ namespace Tctrieu.VnptIt.Crud.Application.Users
             await _unitOfWork.SaveChangesAsync(ct);
         }
 
-        /// <summary>
-        /// Khóa tài khoản
-        /// </summary>
+        // Khóa tài khoản
         public async Task DeactivateAsync(int id, CancellationToken ct = default)
         {
             var user = await GetUserOrThrowAsync(id, ct);
@@ -112,9 +98,7 @@ namespace Tctrieu.VnptIt.Crud.Application.Users
             await _unitOfWork.SaveChangesAsync(ct);
         }
 
-        /// <summary>
-        /// Xóa user
-        /// </summary>
+        // Xóa user
         public async Task DeleteAsync(int id, CancellationToken ct = default)
         {
             var user = await GetUserOrThrowAsync(id, ct);
@@ -123,9 +107,7 @@ namespace Tctrieu.VnptIt.Crud.Application.Users
             await _unitOfWork.SaveChangesAsync(ct);
         }
 
-        /// <summary>
-        /// Lấy user theo id, không có thì ném NotFoundException
-        /// </summary>
+        // Lấy user theo id, không có thì ném NotFoundException
         private async Task<User> GetUserOrThrowAsync(int id, CancellationToken ct)
         {
             var user = await _userRepository.GetByIdAsync(id, ct);

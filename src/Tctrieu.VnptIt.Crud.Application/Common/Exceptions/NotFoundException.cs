@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tctrieu.VnptIt.Crud.Application.Common.Exceptions
 {
-    /// <summary>
-    /// Không tìm thấy dữ liệu (map sang HTTP 404)
-    /// </summary>
+    // Không tìm thấy dữ liệu (map sang HTTP 404)
     public class NotFoundException : Exception
     {
         public NotFoundException(string message) : base(message)

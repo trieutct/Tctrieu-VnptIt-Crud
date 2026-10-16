@@ -22,9 +22,7 @@ namespace Tctrieu.VnptIt.Crud.Domain.Entities
         {
         }
 
-        /// <summary>
-        /// Tạo user mới, kiểm tra dữ liệu đầu vào
-        /// </summary>
+        // Tạo user mới, kiểm tra dữ liệu đầu vào
         public static User Create(
             string fullName,
             string email,
@@ -50,9 +48,7 @@ namespace Tctrieu.VnptIt.Crud.Domain.Entities
             };
         }
 
-        /// <summary>
-        /// Cập nhật thông tin cơ bản
-        /// </summary>
+        // Cập nhật thông tin cơ bản
         public void UpdateProfile(string fullName, string? phoneNumber)
         {
             if (string.IsNullOrWhiteSpace(fullName))
@@ -63,9 +59,7 @@ namespace Tctrieu.VnptIt.Crud.Domain.Entities
             MarkUpdated();
         }
 
-        /// <summary>
-        /// Khóa tài khoản
-        /// </summary>
+        // Khóa tài khoản
         public void Deactivate()
         {
             if (Status == UserStatusEnum.Inactive) return;
@@ -74,9 +68,7 @@ namespace Tctrieu.VnptIt.Crud.Domain.Entities
             MarkUpdated();
         }
 
-        /// <summary>
-        /// Mở khóa tài khoản
-        /// </summary>
+        // Mở khóa tài khoản
         public void Activate()
         {
             if (Status == UserStatusEnum.Active) return;

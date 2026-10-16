@@ -3,9 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Tctrieu.VnptIt.Crud.Application.Auth.Dtos
 {
-    /// <summary>
-    /// Dữ liệu làm mới token / đăng xuất
-    /// </summary>
+    // Dữ liệu làm mới token / đăng xuất
     public class RefreshTokenRequest
     {
         [JsonPropertyName("refresh_token")]

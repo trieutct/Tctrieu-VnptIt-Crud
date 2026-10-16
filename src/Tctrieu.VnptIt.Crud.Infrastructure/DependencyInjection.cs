@@ -15,14 +15,10 @@ using Tctrieu.VnptIt.Crud.Infrastructure.Security;
 
 namespace Tctrieu.VnptIt.Crud.Infrastructure
 {
-    /// <summary>
-    /// Đăng ký service của tầng Infrastructure
-    /// </summary>
+    // Đăng ký service của tầng Infrastructure
     public static class DependencyInjection
     {
-        /// <summary>
-        /// Phiên bản MySQL đang dùng (khớp với image mysql trong docker-compose)
-        /// </summary>
+        // Phiên bản MySQL đang dùng (khớp với image mysql trong docker-compose)
         private static readonly Version MYSQL_VERSION = new Version(8, 0, 36);
 
         public static IServiceCollection AddInfrastructure(
@@ -51,9 +47,7 @@ namespace Tctrieu.VnptIt.Crud.Infrastructure
             return services;
         }
 
-        /// <summary>
-        /// Đọc và kiểm tra cấu hình JWT, thiếu thì dừng ứng dụng ngay khi khởi động
-        /// </summary>
+        // Đọc và kiểm tra cấu hình JWT, thiếu thì dừng ứng dụng ngay khi khởi động
         public static JwtSettings GetJwtSettings(IConfiguration configuration)
         {
             var settings = configuration.GetSection(JwtSettings.SECTION_NAME).Get<JwtSettings>();

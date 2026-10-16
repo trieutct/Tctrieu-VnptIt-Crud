@@ -9,9 +9,7 @@ using Tctrieu.VnptIt.Crud.Application.Users;
 
 namespace Tctrieu.VnptIt.Crud.Application
 {
-    /// <summary>
-    /// Đăng ký service của tầng Application
-    /// </summary>
+    // Đăng ký service của tầng Application
     public static class DependencyInjection
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)

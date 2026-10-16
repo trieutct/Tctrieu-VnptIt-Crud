@@ -8,9 +8,7 @@ using System.Threading.Tasks;
 
 namespace Tctrieu.VnptIt.Crud.Api.Common.ModelBinding
 {
-    /// <summary>
-    /// Cho phép bind query string dạng snake_case (?page_size=10) vào property PascalCase (PageSize)
-    /// </summary>
+    // Cho phép bind query string dạng snake_case (?page_size=10) vào property PascalCase (PageSize)
     public class SnakeCaseQueryValueProviderFactory : IValueProviderFactory
     {
         public Task CreateValueProviderAsync(ValueProviderFactoryContext context)

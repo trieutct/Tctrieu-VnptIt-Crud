@@ -3,9 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Tctrieu.VnptIt.Crud.Application.Auth.Dtos
 {
-    /// <summary>
-    /// Dữ liệu đăng nhập
-    /// </summary>
+    // Dữ liệu đăng nhập
     public class LoginRequest
     {
         [JsonPropertyName("email")]

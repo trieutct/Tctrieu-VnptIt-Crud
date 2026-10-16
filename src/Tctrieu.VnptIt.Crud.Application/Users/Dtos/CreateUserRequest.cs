@@ -8,9 +8,7 @@ using System.Threading.Tasks;
 
 namespace Tctrieu.VnptIt.Crud.Application.Users.Dtos
 {
-    /// <summary>
-    /// Dữ liệu tạo user mới
-    /// </summary>
+    // Dữ liệu tạo user mới
     public class CreateUserRequest
     {
         [JsonPropertyName("full_name")]

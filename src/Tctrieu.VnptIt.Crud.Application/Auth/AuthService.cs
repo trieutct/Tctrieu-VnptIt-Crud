@@ -11,9 +11,7 @@ using Tctrieu.VnptIt.Crud.Domain.Enums;
 
 namespace Tctrieu.VnptIt.Crud.Application.Auth
 {
-    /// <summary>
-    /// Xử lý đăng ký, đăng nhập, làm mới token, đăng xuất
-    /// </summary>
+    // Xử lý đăng ký, đăng nhập, làm mới token, đăng xuất
     public class AuthService : IAuthService
     {
         private const string INVALID_CREDENTIALS_MESSAGE = "Email hoặc mật khẩu không đúng";
@@ -40,9 +38,7 @@ namespace Tctrieu.VnptIt.Crud.Application.Auth
             _tokenService = tokenService;
         }
 
-        /// <summary>
-        /// Đăng ký tài khoản mới và đăng nhập luôn
-        /// </summary>
+        // Đăng ký tài khoản mới và đăng nhập luôn
         public async Task<AuthResponse> RegisterAsync(RegisterRequest request, CancellationToken ct = default)
         {
             // Kiểm tra trùng email
@@ -60,9 +56,7 @@ namespace Tctrieu.VnptIt.Crud.Application.Auth
             return await IssueTokensAsync(user, ct);
         }
 
-        /// <summary>
-        /// Đăng nhập bằng email và mật khẩu
-        /// </summary>
+        // Đăng nhập bằng email và mật khẩu
         public async Task<AuthResponse> LoginAsync(LoginRequest request, CancellationToken ct = default)
         {
             var user = await _userRepository.GetByEmailAsync(request.Email, ct);
@@ -77,9 +71,7 @@ namespace Tctrieu.VnptIt.Crud.Application.Auth
             return await IssueTokensAsync(user, ct);
         }
 
-        /// <summary>
-        /// Đổi refresh token cũ lấy cặp token mới (token cũ bị thu hồi)
-        /// </summary>
+        // Đổi refresh token cũ lấy cặp token mới (token cũ bị thu hồi)
         public async Task<AuthResponse> RefreshTokenAsync(string refreshToken, CancellationToken ct = default)
         {
             var tokenHash = _tokenService.HashRefreshToken(refreshToken);
@@ -118,9 +110,7 @@ namespace Tctrieu.VnptIt.Crud.Application.Auth
             return BuildResponse(user, newRefreshToken, newRefreshTokenExpiresAt);
         }
 
-        /// <summary>
-        /// Đăng xuất: thu hồi refresh token hiện tại
-        /// </summary>
+        // Đăng xuất: thu hồi refresh token hiện tại
         public async Task LogoutAsync(string refreshToken, CancellationToken ct = default)
         {
             var tokenHash = _tokenService.HashRefreshToken(refreshToken);
@@ -133,9 +123,7 @@ namespace Tctrieu.VnptIt.Crud.Application.Auth
             await _unitOfWork.SaveChangesAsync(ct);
         }
 
-        /// <summary>
-        /// Cấp cặp access token + refresh token mới và lưu refresh token
-        /// </summary>
+        // Cấp cặp access token + refresh token mới và lưu refresh token
         private async Task<AuthResponse> IssueTokensAsync(User user, CancellationToken ct)
         {
             var (refreshToken, refreshTokenExpiresAt) = _tokenService.CreateRefreshToken();

@@ -9,9 +9,7 @@ using Tctrieu.VnptIt.Crud.Infrastructure.Persistence;
 
 namespace Tctrieu.VnptIt.Crud.Infrastructure.Repositories
 {
-    /// <summary>
-    /// Truy xuất bảng refresh_tokens trên MySQL
-    /// </summary>
+    // Truy xuất bảng refresh_tokens trên MySQL
     public class RefreshTokenRepository : IRefreshTokenRepository
     {
         private readonly AppDbContext _db;

@@ -9,9 +9,7 @@ using Tctrieu.VnptIt.Crud.Domain.Enums;
 
 namespace Tctrieu.VnptIt.Crud.Application.Users.Dtos
 {
-    /// <summary>
-    /// Thông tin user trả về cho client
-    /// </summary>
+    // Thông tin user trả về cho client
     public class UserDto
     {
         [JsonPropertyName("id")]
@@ -29,9 +27,7 @@ namespace Tctrieu.VnptIt.Crud.Application.Users.Dtos
         [JsonPropertyName("updated_at")]
         public DateTime? UpdatedAt { get; set; }
 
-        /// <summary>
-        /// Chuyển từ entity sang DTO
-        /// </summary>
+        // Chuyển từ entity sang DTO
         public static UserDto FromEntity(User user)
         {
             return new UserDto

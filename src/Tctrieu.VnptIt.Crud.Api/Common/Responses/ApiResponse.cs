@@ -4,9 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Tctrieu.VnptIt.Crud.Api.Common.Responses
 {
-    /// <summary>
-    /// Shape response thành công chuẩn: { code, message, data }
-    /// </summary>
+    // Shape response thành công chuẩn: { code, message, data }
     public class ApiResponse<T>
     {
         [JsonPropertyName("code")]
@@ -26,9 +24,7 @@ namespace Tctrieu.VnptIt.Crud.Api.Common.Responses
         }
     }
 
-    /// <summary>
-    /// Dữ liệu dạng danh sách kèm tổng số bản ghi: { items, total_items, ...additionalInfo }
-    /// </summary>
+    // Dữ liệu dạng danh sách kèm tổng số bản ghi: { items, total_items, ...additionalInfo }
     public class CommonListResponse<T>
     {
         [JsonPropertyName("items")]
@@ -42,9 +38,7 @@ namespace Tctrieu.VnptIt.Crud.Api.Common.Responses
         public Dictionary<string, object> AdditionalInfo { get; set; }
     }
 
-    /// <summary>
-    /// Chi tiết 1 lỗi cụ thể (ví dụ lỗi từng field khi validate)
-    /// </summary>
+    // Chi tiết 1 lỗi cụ thể (ví dụ lỗi từng field khi validate)
     public class ErrorDetail
     {
         [JsonPropertyName("key")]
@@ -61,9 +55,7 @@ namespace Tctrieu.VnptIt.Crud.Api.Common.Responses
         public object Data { get; set; }
     }
 
-    /// <summary>
-    /// Shape response lỗi chuẩn: { code, message, errors }
-    /// </summary>
+    // Shape response lỗi chuẩn: { code, message, errors }
     public class ErrorResponse
     {
         [JsonPropertyName("code")]
@@ -86,28 +78,20 @@ namespace Tctrieu.VnptIt.Crud.Api.Common.Responses
         }
     }
 
-    /// <summary>
-    /// Factory tạo response, dùng trong controller
-    /// </summary>
+    // Factory tạo response, dùng trong controller
     public static class ApiResponse
     {
         public const string DefaultSuccessMessage = "success";
 
-        /// <summary>
-        /// Bọc response thành công: { code, message, data }
-        /// </summary>
+        // Bọc response thành công: { code, message, data }
         public static ApiResponse<T> Success<T>(T data, string message = DefaultSuccessMessage, int code = StatusCodes.Status200OK)
             => new ApiResponse<T>(data, message, code);
 
-        /// <summary>
-        /// Response thành công không có dữ liệu (data = {})
-        /// </summary>
+        // Response thành công không có dữ liệu (data = {})
         public static ApiResponse<object> Success(string message = DefaultSuccessMessage)
             => new ApiResponse<object>(new { }, message);
 
-        /// <summary>
-        /// Bọc response danh sách: { code, message, data: { items, total_items, ...additionalInfo } }
-        /// </summary>
+        // Bọc response danh sách: { code, message, data: { items, total_items, ...additionalInfo } }
         public static ApiResponse<CommonListResponse<T>> SuccessList<T>(
             IEnumerable<T> items,
             int total,
@@ -123,9 +107,7 @@ namespace Tctrieu.VnptIt.Crud.Api.Common.Responses
             return new ApiResponse<CommonListResponse<T>>(data, message);
         }
 
-        /// <summary>
-        /// Bọc response lỗi: { code, message, errors }
-        /// </summary>
+        // Bọc response lỗi: { code, message, errors }
         public static ErrorResponse Error(
             int code = StatusCodes.Status500InternalServerError,
             string message = "",

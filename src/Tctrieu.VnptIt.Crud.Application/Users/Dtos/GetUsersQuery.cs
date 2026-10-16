@@ -7,19 +7,13 @@ using Tctrieu.VnptIt.Crud.Domain.Enums;
 
 namespace Tctrieu.VnptIt.Crud.Application.Users.Dtos
 {
-    /// <summary>
-    /// Điều kiện lọc và phân trang danh sách user
-    /// </summary>
+    // Điều kiện lọc và phân trang danh sách user
     public class GetUsersQuery
     {
-        /// <summary>
-        /// Số bản ghi mặc định mỗi trang
-        /// </summary>
+        // Số bản ghi mặc định mỗi trang
         public const int DEFAULT_PAGE_SIZE = 20;
 
-        /// <summary>
-        /// Số bản ghi tối đa mỗi trang
-        /// </summary>
+        // Số bản ghi tối đa mỗi trang
         public const int MAX_PAGE_SIZE = 100;
 
         public string? Keyword { get; set; }

@@ -4,9 +4,7 @@ using Tctrieu.VnptIt.Crud.Domain.Entities;
 
 namespace Tctrieu.VnptIt.Crud.Infrastructure.Persistence.Configurations
 {
-    /// <summary>
-    /// Cấu hình map entity RefreshToken xuống bảng refresh_tokens
-    /// </summary>
+    // Cấu hình map entity RefreshToken xuống bảng refresh_tokens
     public class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
     {
         public void Configure(EntityTypeBuilder<RefreshToken> builder)

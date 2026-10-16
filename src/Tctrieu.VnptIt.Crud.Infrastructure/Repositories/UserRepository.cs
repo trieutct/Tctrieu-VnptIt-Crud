@@ -12,9 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Tctrieu.VnptIt.Crud.Infrastructure.Repositories
 {
-    /// <summary>
-    /// Truy xuất bảng users trên MySQL
-    /// </summary>
+    // Truy xuất bảng users trên MySQL
     public class UserRepository : IUserRepository
     {
         private readonly AppDbContext _db;

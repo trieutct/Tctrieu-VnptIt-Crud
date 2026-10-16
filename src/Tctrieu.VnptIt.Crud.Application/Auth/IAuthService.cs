@@ -4,9 +4,7 @@ using Tctrieu.VnptIt.Crud.Application.Auth.Dtos;
 
 namespace Tctrieu.VnptIt.Crud.Application.Auth
 {
-    /// <summary>
-    /// Các nghiệp vụ xác thực
-    /// </summary>
+    // Các nghiệp vụ xác thực
     public interface IAuthService
     {
         Task<AuthResponse> RegisterAsync(RegisterRequest request, CancellationToken ct = default);

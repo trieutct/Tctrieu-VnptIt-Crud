@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -18,6 +19,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Tctrieu.VnptIt.Crud.Api.Common.Authorization;
 using Tctrieu.VnptIt.Crud.Api.Common.ModelBinding;
 using Tctrieu.VnptIt.Crud.Api.Common.Responses;
 using Tctrieu.VnptIt.Crud.Api.Middlewares;
@@ -139,7 +141,15 @@ namespace Tctrieu.VnptIt.Crud.Api
                     };
                 });
 
-            services.AddAuthorization();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(Policies.ACTIVE_USER, policy => policy
+                    .RequireAuthenticatedUser()
+                    .AddRequirements(new ActiveUserRequirement()));
+            });
+
+            // Scoped vì handler dùng repository (DbContext)
+            services.AddScoped<IAuthorizationHandler, ActiveUserHandler>();
         }
 
         // FullName => full_name, PageSize => page_size

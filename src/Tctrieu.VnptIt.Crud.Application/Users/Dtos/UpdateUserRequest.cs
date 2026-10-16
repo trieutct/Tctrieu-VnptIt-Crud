@@ -8,9 +8,7 @@ using System.Threading.Tasks;
 
 namespace Tctrieu.VnptIt.Crud.Application.Users.Dtos
 {
-    /// <summary>
-    /// Dữ liệu cập nhật user (không cho đổi email, mật khẩu ở đây)
-    /// </summary>
+    // Dữ liệu cập nhật user (không cho đổi email, mật khẩu ở đây)
     public class UpdateUserRequest
     {
         [JsonPropertyName("full_name")]

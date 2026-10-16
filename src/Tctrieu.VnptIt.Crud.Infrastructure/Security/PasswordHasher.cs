@@ -8,25 +8,16 @@ using Tctrieu.VnptIt.Crud.Application.Common.Interfaces;
 
 namespace Tctrieu.VnptIt.Crud.Infrastructure.Security
 {
-    /// <summary>
-    /// Mã hóa mật khẩu bằng PBKDF2-SHA256
-    /// Định dạng lưu: {iterations}.{salt_base64}.{hash_base64}
-    /// </summary>
+    // Mã hóa mật khẩu bằng PBKDF2-SHA256 Định dạng lưu: {iterations}.{salt_base64}.{hash_base64}
     public class PasswordHasher : IPasswordHasher
     {
-        /// <summary>
-        /// Độ dài salt (byte)
-        /// </summary>
+        // Độ dài salt (byte)
         private const int SALT_SIZE = 16;
 
-        /// <summary>
-        /// Độ dài hash (byte)
-        /// </summary>
+        // Độ dài hash (byte)
         private const int HASH_SIZE = 32;
 
-        /// <summary>
-        /// Số vòng lặp, càng cao càng khó dò nhưng càng chậm
-        /// </summary>
+        // Số vòng lặp, càng cao càng khó dò nhưng càng chậm
         private const int ITERATIONS = 100_000;
 
         public string Hash(string password)

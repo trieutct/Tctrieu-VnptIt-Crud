@@ -4,9 +4,7 @@ using Tctrieu.VnptIt.Crud.Domain.Exceptions;
 
 namespace Tctrieu.VnptIt.Crud.Domain.Entities
 {
-    /// <summary>
-    /// Refresh token của user, chỉ lưu bản hash (không lưu token gốc)
-    /// </summary>
+    // Refresh token của user, chỉ lưu bản hash (không lưu token gốc)
     public class RefreshToken : BaseEntity
     {
         public int UserId { get; private set; }
@@ -14,9 +12,7 @@ namespace Tctrieu.VnptIt.Crud.Domain.Entities
         public DateTime ExpiresAt { get; private set; }
         public DateTime? RevokedAt { get; private set; }
 
-        /// <summary>
-        /// Hash của token mới thay thế token này (khi refresh)
-        /// </summary>
+        // Hash của token mới thay thế token này (khi refresh)
         public string? ReplacedByTokenHash { get; private set; }
 
         public bool IsExpired => DateTime.UtcNow >= ExpiresAt;
@@ -28,9 +24,7 @@ namespace Tctrieu.VnptIt.Crud.Domain.Entities
         {
         }
 
-        /// <summary>
-        /// Tạo refresh token mới cho user
-        /// </summary>
+        // Tạo refresh token mới cho user
         public static RefreshToken Create(int userId, string tokenHash, DateTime expiresAt)
         {
             if (string.IsNullOrWhiteSpace(tokenHash))
@@ -44,9 +38,7 @@ namespace Tctrieu.VnptIt.Crud.Domain.Entities
             };
         }
 
-        /// <summary>
-        /// Thu hồi token, kèm hash token thay thế nếu có
-        /// </summary>
+        // Thu hồi token, kèm hash token thay thế nếu có
         public void Revoke(string? replacedByTokenHash = null)
         {
             if (IsRevoked) return;

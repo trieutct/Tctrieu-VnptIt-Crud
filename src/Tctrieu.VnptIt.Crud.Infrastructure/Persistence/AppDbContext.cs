@@ -9,9 +9,7 @@ using Tctrieu.VnptIt.Crud.Domain.Entities;
 
 namespace Tctrieu.VnptIt.Crud.Infrastructure.Persistence
 {
-    /// <summary>
-    /// DbContext làm việc với MySQL
-    /// </summary>
+    // DbContext làm việc với MySQL
     public class AppDbContext : DbContext, IUnitOfWork
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)

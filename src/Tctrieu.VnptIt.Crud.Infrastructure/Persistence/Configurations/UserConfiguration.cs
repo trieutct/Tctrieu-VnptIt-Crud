@@ -10,9 +10,7 @@ using Tctrieu.VnptIt.Crud.Domain.Enums;
 
 namespace Tctrieu.VnptIt.Crud.Infrastructure.Persistence.Configurations
 {
-    /// <summary>
-    /// Cấu hình map entity User xuống bảng users
-    /// </summary>
+    // Cấu hình map entity User xuống bảng users
     public class UserConfiguration : IEntityTypeConfiguration<User>
     {
         public void Configure(EntityTypeBuilder<User> builder)

@@ -9,9 +9,7 @@ using Tctrieu.VnptIt.Crud.Application.Users.Dtos;
 
 namespace Tctrieu.VnptIt.Crud.Application.Users
 {
-    /// <summary>
-    /// Các nghiệp vụ liên quan tới User
-    /// </summary>
+    // Các nghiệp vụ liên quan tới User
     public interface IUserService
     {
         Task<UserDto> GetByIdAsync(int id, CancellationToken ct = default);

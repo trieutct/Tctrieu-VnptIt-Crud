@@ -4,14 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Tctrieu.VnptIt.Crud.Api.Common.Authorization;
 using Tctrieu.VnptIt.Crud.Api.Common.Responses;
 using Tctrieu.VnptIt.Crud.Application.Users;
 using Tctrieu.VnptIt.Crud.Application.Users.Dtos;
 
 namespace Tctrieu.VnptIt.Crud.Api.Controllers
-{/// <summary>
- /// API quản lý người dùng
- /// </summary>
+{
+    // API quản lý người dùng
     [ApiController]
     [Authorize]
     [Route("api/users")]
@@ -24,10 +24,9 @@ namespace Tctrieu.VnptIt.Crud.Api.Controllers
             _userService = userService;
         }
 
-        /// <summary>
-        /// Lấy danh sách user có lọc và phân trang
-        /// </summary>
+        // Lấy danh sách user có lọc và phân trang
         [HttpGet]
+        [Authorize(Policy = Policies.ACTIVE_USER)]
         public async Task<ActionResult<ApiResponse<CommonListResponse<UserDto>>>> GetList(
             [FromQuery] GetUsersQuery query,
             CancellationToken ct)
@@ -45,9 +44,7 @@ namespace Tctrieu.VnptIt.Crud.Api.Controllers
             return Ok(ApiResponse.SuccessList(result.Items, result.TotalCount, pagination));
         }
 
-        /// <summary>
-        /// Lấy chi tiết user
-        /// </summary>
+        // Lấy chi tiết user
         [HttpGet("{id:int}")]
         public async Task<ActionResult<ApiResponse<UserDto>>> GetById(int id, CancellationToken ct)
         {
@@ -55,9 +52,7 @@ namespace Tctrieu.VnptIt.Crud.Api.Controllers
             return Ok(ApiResponse.Success(user));
         }
 
-        /// <summary>
-        /// Tạo user mới
-        /// </summary>
+        // Tạo user mới
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<ActionResult<ApiResponse<UserDto>>> Create(
@@ -71,9 +66,7 @@ namespace Tctrieu.VnptIt.Crud.Api.Controllers
                 ApiResponse.Success(user, "Tạo user thành công", StatusCodes.Status201Created));
         }
 
-        /// <summary>
-        /// Cập nhật thông tin user
-        /// </summary>
+        // Cập nhật thông tin user
         [HttpPut("{id:int}")]
         public async Task<ActionResult<ApiResponse<UserDto>>> Update(
             int id,
@@ -84,9 +77,7 @@ namespace Tctrieu.VnptIt.Crud.Api.Controllers
             return Ok(ApiResponse.Success(user, "Cập nhật user thành công"));
         }
 
-        /// <summary>
-        /// Mở khóa tài khoản
-        /// </summary>
+        // Mở khóa tài khoản
         [HttpPatch("{id:int}/activate")]
         public async Task<ActionResult<ApiResponse<object>>> Activate(int id, CancellationToken ct)
         {
@@ -94,9 +85,7 @@ namespace Tctrieu.VnptIt.Crud.Api.Controllers
             return Ok(ApiResponse.Success("Mở khóa tài khoản thành công"));
         }
 
-        /// <summary>
-        /// Khóa tài khoản
-        /// </summary>
+        // Khóa tài khoản
         [HttpPatch("{id:int}/deactivate")]
         public async Task<ActionResult<ApiResponse<object>>> Deactivate(int id, CancellationToken ct)
         {
@@ -104,9 +93,7 @@ namespace Tctrieu.VnptIt.Crud.Api.Controllers
             return Ok(ApiResponse.Success("Khóa tài khoản thành công"));
         }
 
-        /// <summary>
-        /// Xóa user
-        /// </summary>
+        // Xóa user
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<ApiResponse<object>>> Delete(int id, CancellationToken ct)
         {

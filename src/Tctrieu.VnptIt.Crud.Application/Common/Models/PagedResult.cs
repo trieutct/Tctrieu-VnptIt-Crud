@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tctrieu.VnptIt.Crud.Application.Common.Models
 {
-    /// <summary>
-    /// Kết quả phân trang dùng chung
-    /// </summary>
+    // Kết quả phân trang dùng chung
     public class PagedResult<T>
     {
         public IReadOnlyList<T> Items { get; }

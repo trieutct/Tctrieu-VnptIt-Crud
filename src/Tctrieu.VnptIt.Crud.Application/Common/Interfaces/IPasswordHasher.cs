@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tctrieu.VnptIt.Crud.Application.Common.Interfaces
 {
-    /// <summary>
-    /// Mã hóa và kiểm tra mật khẩu
-    /// </summary>
+    // Mã hóa và kiểm tra mật khẩu
     public interface IPasswordHasher
     {
         string Hash(string password);

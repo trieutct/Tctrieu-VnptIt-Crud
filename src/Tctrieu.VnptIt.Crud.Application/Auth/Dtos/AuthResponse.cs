@@ -4,9 +4,7 @@ using Tctrieu.VnptIt.Crud.Application.Users.Dtos;
 
 namespace Tctrieu.VnptIt.Crud.Application.Auth.Dtos
 {
-    /// <summary>
-    /// Kết quả đăng nhập / đăng ký / làm mới token
-    /// </summary>
+    // Kết quả đăng nhập / đăng ký / làm mới token
     public class AuthResponse
     {
         [JsonPropertyName("token_type")]

@@ -9,14 +9,10 @@ using Tctrieu.VnptIt.Crud.Domain.Entities;
 
 namespace Tctrieu.VnptIt.Crud.Infrastructure.Security
 {
-    /// <summary>
-    /// Sinh JWT access token (HMAC-SHA256) và refresh token ngẫu nhiên
-    /// </summary>
+    // Sinh JWT access token (HMAC-SHA256) và refresh token ngẫu nhiên
     public class TokenService : ITokenService
     {
-        /// <summary>
-        /// Độ dài refresh token (byte)
-        /// </summary>
+        // Độ dài refresh token (byte)
         private const int REFRESH_TOKEN_SIZE = 64;
 
         private readonly JwtSettings _settings;

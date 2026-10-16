@@ -9,9 +9,7 @@ using Tctrieu.VnptIt.Crud.Domain.Exceptions;
 
 namespace Tctrieu.VnptIt.Crud.Api.Middlewares
 {
-    /// <summary>
-    /// Bắt mọi exception và trả về JSON lỗi thống nhất
-    /// </summary>
+    // Bắt mọi exception và trả về JSON lỗi thống nhất
     public class ExceptionHandlingMiddleware
     {
         private readonly RequestDelegate _next;

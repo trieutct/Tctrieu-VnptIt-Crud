@@ -9,23 +9,17 @@ using Tctrieu.VnptIt.Crud.Domain.Entities;
 
 namespace Tctrieu.VnptIt.Crud.Application.Users
 {
-    /// <summary>
-    /// Truy xuất dữ liệu User, cài đặt ở Infrastructure (MySQL)
-    /// </summary>
+    // Truy xuất dữ liệu User, cài đặt ở Infrastructure (MySQL)
     public interface IUserRepository
     {
         Task<User?> GetByIdAsync(int id, CancellationToken ct = default);
 
         Task<User?> GetByEmailAsync(string email, CancellationToken ct = default);
 
-        /// <summary>
-        /// Kiểm tra email đã tồn tại, bỏ qua user có id = excludeId (dùng khi cập nhật)
-        /// </summary>
+        // Kiểm tra email đã tồn tại, bỏ qua user có id = excludeId (dùng khi cập nhật)
         Task<bool> EmailExistsAsync(string email, int? excludeId = null, CancellationToken ct = default);
 
-        /// <summary>
-        /// Lấy danh sách có lọc và phân trang, trả về kèm tổng số bản ghi
-        /// </summary>
+        // Lấy danh sách có lọc và phân trang, trả về kèm tổng số bản ghi
         Task<(IReadOnlyList<User> Items, int TotalCount)> GetPagedAsync(
             GetUsersQuery query,
             CancellationToken ct = default);

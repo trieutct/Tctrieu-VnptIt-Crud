@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 
 namespace Tctrieu.VnptIt.Crud.Application.Common.Interfaces
 {
-    /// <summary>
-    /// Lưu toàn bộ thay đổi xuống database trong một lần
-    /// </summary>
+    // Lưu toàn bộ thay đổi xuống database trong một lần
     public interface IUnitOfWork
     {
         Task<int> SaveChangesAsync(CancellationToken ct = default);

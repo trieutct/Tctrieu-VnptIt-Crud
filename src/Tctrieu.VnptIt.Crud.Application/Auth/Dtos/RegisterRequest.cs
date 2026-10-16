@@ -3,9 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Tctrieu.VnptIt.Crud.Application.Auth.Dtos
 {
-    /// <summary>
-    /// Dữ liệu đăng ký tài khoản
-    /// </summary>
+    // Dữ liệu đăng ký tài khoản
     public class RegisterRequest
     {
         [JsonPropertyName("full_name")]

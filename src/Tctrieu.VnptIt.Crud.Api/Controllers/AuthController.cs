@@ -14,9 +14,7 @@ using Tctrieu.VnptIt.Crud.Application.Users.Dtos;
 
 namespace Tctrieu.VnptIt.Crud.Api.Controllers
 {
-    /// <summary>
-    /// API xác thực: đăng ký, đăng nhập, làm mới token, đăng xuất
-    /// </summary>
+    // API xác thực: đăng ký, đăng nhập, làm mới token, đăng xuất
     [ApiController]
     [Route("api/auth")]
     public class AuthController : ControllerBase
@@ -30,9 +28,7 @@ namespace Tctrieu.VnptIt.Crud.Api.Controllers
             _userService = userService;
         }
 
-        /// <summary>
-        /// Đăng ký tài khoản mới, trả về token luôn
-        /// </summary>
+        // Đăng ký tài khoản mới, trả về token luôn
         [HttpPost("register")]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -46,9 +42,7 @@ namespace Tctrieu.VnptIt.Crud.Api.Controllers
                 ApiResponse.Success(result, "Đăng ký thành công", StatusCodes.Status201Created));
         }
 
-        /// <summary>
-        /// Đăng nhập bằng email và mật khẩu
-        /// </summary>
+        // Đăng nhập bằng email và mật khẩu
         [HttpPost("login")]
         [AllowAnonymous]
         public async Task<ActionResult<ApiResponse<AuthResponse>>> Login(
@@ -59,9 +53,7 @@ namespace Tctrieu.VnptIt.Crud.Api.Controllers
             return Ok(ApiResponse.Success(result, "Đăng nhập thành công"));
         }
 
-        /// <summary>
-        /// Đổi refresh token lấy cặp token mới
-        /// </summary>
+        // Đổi refresh token lấy cặp token mới
         [HttpPost("refresh-token")]
         [AllowAnonymous]
         public async Task<ActionResult<ApiResponse<AuthResponse>>> RefreshToken(
@@ -72,9 +64,7 @@ namespace Tctrieu.VnptIt.Crud.Api.Controllers
             return Ok(ApiResponse.Success(result, "Làm mới token thành công"));
         }
 
-        /// <summary>
-        /// Đăng xuất: thu hồi refresh token
-        /// </summary>
+        // Đăng xuất: thu hồi refresh token
         [HttpPost("logout")]
         [AllowAnonymous]
         public async Task<ActionResult<ApiResponse<object>>> Logout(
@@ -85,9 +75,7 @@ namespace Tctrieu.VnptIt.Crud.Api.Controllers
             return Ok(ApiResponse.Success("Đăng xuất thành công"));
         }
 
-        /// <summary>
-        /// Lấy thông tin user đang đăng nhập
-        /// </summary>
+        // Lấy thông tin user đang đăng nhập
         [HttpGet("me")]
         [Authorize]
         public async Task<ActionResult<ApiResponse<UserDto>>> Me(CancellationToken ct)
