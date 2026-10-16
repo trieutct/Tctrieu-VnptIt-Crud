@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tctrieu.VnptIt.Crud.Application.Auth;
 using Tctrieu.VnptIt.Crud.Application.Users;
 
 namespace Tctrieu.VnptIt.Crud.Application
@@ -16,6 +17,7 @@ namespace Tctrieu.VnptIt.Crud.Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthService, AuthService>();
             return services;
         }
     }

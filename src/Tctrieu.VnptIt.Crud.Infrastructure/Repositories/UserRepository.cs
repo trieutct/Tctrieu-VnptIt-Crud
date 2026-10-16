@@ -29,6 +29,13 @@ namespace Tctrieu.VnptIt.Crud.Infrastructure.Repositories
             return _db.Users.FirstOrDefaultAsync(x => x.Id == id, ct)!;
         }
 
+        public Task<User?> GetByEmailAsync(string email, CancellationToken ct = default)
+        {
+            var normalized_email = email.Trim().ToLowerInvariant();
+
+            return _db.Users.FirstOrDefaultAsync(x => x.Email == normalized_email, ct)!;
+        }
+
         public Task<bool> EmailExistsAsync(string email, int? excludeId = null, CancellationToken ct = default)
         {
             var normalized_email = email.Trim().ToLowerInvariant();

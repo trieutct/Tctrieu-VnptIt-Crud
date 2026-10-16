@@ -50,6 +50,8 @@ namespace Tctrieu.VnptIt.Crud.Api.Middlewares
             var (status_code, message) = ex switch
             {
                 DomainException => (StatusCodes.Status400BadRequest, ex.Message),
+                UnauthorizedException => (StatusCodes.Status401Unauthorized, ex.Message),
+                ForbiddenException => (StatusCodes.Status403Forbidden, ex.Message),
                 NotFoundException => (StatusCodes.Status404NotFound, ex.Message),
                 ConflictException => (StatusCodes.Status409Conflict, ex.Message),
                 _ => (StatusCodes.Status500InternalServerError, "Lỗi hệ thống, vui lòng thử lại sau"),

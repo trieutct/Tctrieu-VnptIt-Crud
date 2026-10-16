@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tctrieu.VnptIt.Crud.Application.Auth;
 using Tctrieu.VnptIt.Crud.Application.Common.Interfaces;
 using Tctrieu.VnptIt.Crud.Application.Users;
 using Tctrieu.VnptIt.Crud.Infrastructure.Persistence;
@@ -40,9 +41,30 @@ namespace Tctrieu.VnptIt.Crud.Infrastructure
             services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<AppDbContext>());
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
             services.AddSingleton<IPasswordHasher, PasswordHasher>();
 
+            // Cấu hình JWT dùng chung cho TokenService và JwtBearer ở tầng Api
+            services.AddSingleton(GetJwtSettings(configuration));
+            services.AddSingleton<ITokenService, TokenService>();
+
             return services;
+        }
+
+        /// <summary>
+        /// Đọc và kiểm tra cấu hình JWT, thiếu thì dừng ứng dụng ngay khi khởi động
+        /// </summary>
+        public static JwtSettings GetJwtSettings(IConfiguration configuration)
+        {
+            var settings = configuration.GetSection(JwtSettings.SECTION_NAME).Get<JwtSettings>();
+
+            if (settings == null || string.IsNullOrWhiteSpace(settings.SecretKey))
+                throw new InvalidOperationException("Chưa cấu hình Jwt:SecretKey trong appsettings.json");
+
+            if (settings.SecretKey.Length < JwtSettings.MIN_SECRET_KEY_LENGTH)
+                throw new InvalidOperationException($"Jwt:SecretKey phải có tối thiểu {JwtSettings.MIN_SECRET_KEY_LENGTH} ký tự");
+
+            return settings;
         }
     }
 }

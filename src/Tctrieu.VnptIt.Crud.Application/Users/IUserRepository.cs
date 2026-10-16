@@ -16,6 +16,8 @@ namespace Tctrieu.VnptIt.Crud.Application.Users
     {
         Task<User?> GetByIdAsync(int id, CancellationToken ct = default);
 
+        Task<User?> GetByEmailAsync(string email, CancellationToken ct = default);
+
         /// <summary>
         /// Kiểm tra email đã tồn tại, bỏ qua user có id = excludeId (dùng khi cập nhật)
         /// </summary>
