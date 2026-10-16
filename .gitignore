@@ -48,3 +48,5 @@ publish/
 # Local config
 appsettings.Development.json
 appsettings.Local.json
+# File upload lưu trên server
+**/uploads/

@@ -8,10 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Tctrieu.VnptIt.Crud.Application.Auth;
 using Tctrieu.VnptIt.Crud.Application.Common.Interfaces;
+using Tctrieu.VnptIt.Crud.Application.Files;
 using Tctrieu.VnptIt.Crud.Application.Users;
 using Tctrieu.VnptIt.Crud.Infrastructure.Persistence;
+using Tctrieu.VnptIt.Crud.Infrastructure.Persistence.Mongo;
 using Tctrieu.VnptIt.Crud.Infrastructure.Repositories;
 using Tctrieu.VnptIt.Crud.Infrastructure.Security;
+using Tctrieu.VnptIt.Crud.Infrastructure.Storage;
 
 namespace Tctrieu.VnptIt.Crud.Infrastructure
 {
@@ -44,7 +47,33 @@ namespace Tctrieu.VnptIt.Crud.Infrastructure
             services.AddSingleton(GetJwtSettings(configuration));
             services.AddSingleton<ITokenService, TokenService>();
 
+            // MongoDB lưu thông tin file, nội dung file lưu trên ổ đĩa server
+            services.AddSingleton(GetMongoSettings(configuration));
+            services.AddSingleton<MongoDbContext>();
+            services.AddScoped<IFileRepository, FileRepository>();
+
+            var file_storage_settings = configuration.GetSection(FileStorageSettings.SECTION_NAME).Get<FileStorageSettings>()
+                ?? new FileStorageSettings();
+            if (file_storage_settings.AllowedExtensions.Length == 0)
+                file_storage_settings.AllowedExtensions = FileStorageSettings.DEFAULT_ALLOWED_EXTENSIONS;
+            services.AddSingleton(file_storage_settings);
+            services.AddSingleton<IFileStorage, LocalFileStorage>();
+
             return services;
+        }
+
+        // Đọc và kiểm tra cấu hình MongoDB, thiếu thì dừng ứng dụng ngay khi khởi động
+        private static MongoSettings GetMongoSettings(IConfiguration configuration)
+        {
+            var settings = configuration.GetSection(MongoSettings.SECTION_NAME).Get<MongoSettings>();
+
+            if (settings == null || string.IsNullOrWhiteSpace(settings.ConnectionString))
+                throw new InvalidOperationException("Chưa cấu hình MongoDb:ConnectionString trong appsettings.json");
+
+            if (string.IsNullOrWhiteSpace(settings.DatabaseName))
+                throw new InvalidOperationException("Chưa cấu hình MongoDb:DatabaseName trong appsettings.json");
+
+            return settings;
         }
 
         // Đọc và kiểm tra cấu hình JWT, thiếu thì dừng ứng dụng ngay khi khởi động

@@ -3,16 +3,16 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -24,6 +24,7 @@ using Tctrieu.VnptIt.Crud.Api.Common.ModelBinding;
 using Tctrieu.VnptIt.Crud.Api.Common.Responses;
 using Tctrieu.VnptIt.Crud.Api.Middlewares;
 using Tctrieu.VnptIt.Crud.Application;
+using Tctrieu.VnptIt.Crud.Application.Files;
 using Tctrieu.VnptIt.Crud.Infrastructure;
 
 namespace Tctrieu.VnptIt.Crud.Api
@@ -163,7 +164,7 @@ namespace Tctrieu.VnptIt.Crud.Api
             return response.WriteAsync(JsonSerializer.Serialize(ApiResponse.Error(statusCode, message)));
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, FileStorageSettings fileStorageSettings)
         {
             // Đặt đầu tiên để bắt được lỗi của mọi middleware phía sau
             app.UseMiddleware<ExceptionHandlingMiddleware>();
@@ -176,6 +177,18 @@ namespace Tctrieu.VnptIt.Crud.Api
             }
 
             app.UseHttpsRedirection();
+
+            // Public thư mục upload để xem file qua URL (đặt trước Authentication nên không cần token)
+            var upload_root = fileStorageSettings.GetFullRootPath();
+            Directory.CreateDirectory(upload_root);
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(upload_root),
+                RequestPath = fileStorageSettings.RequestPath,
+                // Chặn trình duyệt tự đoán content-type khác với đuôi file
+                OnPrepareResponse = ctx => ctx.Context.Response.Headers["X-Content-Type-Options"] = "nosniff",
+            });
+
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();

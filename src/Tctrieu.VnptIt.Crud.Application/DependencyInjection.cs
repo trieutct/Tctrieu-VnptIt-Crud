@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tctrieu.VnptIt.Crud.Application.Auth;
+using Tctrieu.VnptIt.Crud.Application.Files;
 using Tctrieu.VnptIt.Crud.Application.Users;
 
 namespace Tctrieu.VnptIt.Crud.Application
@@ -16,6 +17,7 @@ namespace Tctrieu.VnptIt.Crud.Application
         {
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IFileService, FileService>();
             return services;
         }
     }
