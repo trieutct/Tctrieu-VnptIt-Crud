@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.17">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.17">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -16,6 +20,10 @@
     <ProjectReference Include="..\Tctrieu.VnptIt.Crud.Application\Tctrieu.VnptIt.Crud.Application.csproj" />
     <ProjectReference Include="..\Tctrieu.VnptIt.Crud.Domain\Tctrieu.VnptIt.Crud.Domain.csproj" />
     <ProjectReference Include="..\Tctrieu.VnptIt.Crud.Infrastructure\Tctrieu.VnptIt.Crud.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>

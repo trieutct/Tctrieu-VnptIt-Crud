@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -12,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Tctrieu.VnptIt.Crud.Api.Common.Responses;
 using Tctrieu.VnptIt.Crud.Api.Middlewares;
 using Tctrieu.VnptIt.Crud.Application;
 using Tctrieu.VnptIt.Crud.Infrastructure;
@@ -36,6 +38,25 @@ namespace Tctrieu.VnptIt.Crud.Api
                 {
                     // Enum trả về dạng chữ "Active" thay vì số
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                })
+                .ConfigureApiBehaviorOptions(options =>
+                {
+                    // Lỗi validate trả về format { code, message, errors[] } thay vì ProblemDetails mặc định
+                    options.InvalidModelStateResponseFactory = context =>
+                    {
+                        var errors = context.ModelState
+                            .Where(x => x.Value.Errors.Count > 0)
+                            .SelectMany(x => x.Value.Errors.Select(e => new ErrorDetail
+                            {
+                                Key = x.Key,
+                                ErrorCode = StatusCodes.Status400BadRequest,
+                                Message = e.ErrorMessage,
+                            }))
+                            .ToList();
+
+                        return new BadRequestObjectResult(
+                            ApiResponse.Error(StatusCodes.Status400BadRequest, "Dữ liệu không hợp lệ", errors));
+                    };
                 });
             services.AddApplication();
             services.AddInfrastructure(Configuration);

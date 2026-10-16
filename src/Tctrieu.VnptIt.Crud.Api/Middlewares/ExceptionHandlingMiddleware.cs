@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Tctrieu.VnptIt.Crud.Api.Common.Responses;
 using Tctrieu.VnptIt.Crud.Application.Common.Exceptions;
 using Tctrieu.VnptIt.Crud.Domain.Exceptions;
 
@@ -28,7 +29,14 @@ namespace Tctrieu.VnptIt.Crud.Api.Middlewares
         {
             try
             {
+                // Log thông tin request
+                _logger.LogInformation("Request: {Method} {Path}", context.Request.Method, context.Request.Path);
+
+                // Chỉ log, không chặn authentication
                 await _next(context);
+
+                // Log thông tin response
+                _logger.LogInformation("Response: {StatusCode}", context.Response.StatusCode);
             }
             catch (Exception ex)
             {
@@ -56,11 +64,7 @@ namespace Tctrieu.VnptIt.Crud.Api.Middlewares
             context.Response.StatusCode = status_code;
             context.Response.ContentType = "application/json";
 
-            var body = JsonSerializer.Serialize(new
-            {
-                status = status_code,
-                message,
-            });
+            var body = JsonSerializer.Serialize(ApiResponse.Error(status_code, message));
 
             await context.Response.WriteAsync(body);
         }
