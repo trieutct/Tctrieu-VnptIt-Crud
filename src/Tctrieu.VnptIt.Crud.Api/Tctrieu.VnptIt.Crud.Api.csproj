@@ -23,8 +23,4 @@
     <ProjectReference Include="..\Tctrieu.VnptIt.Crud.Infrastructure\Tctrieu.VnptIt.Crud.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
-
 </Project>

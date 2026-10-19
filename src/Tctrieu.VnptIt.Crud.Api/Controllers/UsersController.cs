@@ -46,6 +46,7 @@ namespace Tctrieu.VnptIt.Crud.Api.Controllers
 
         // Lấy chi tiết user
         [HttpGet("{id:int}")]
+        [Authorize(Policy = Policies.ACTIVE_USER)]
         public async Task<ActionResult<ApiResponse<UserDto>>> GetById(int id, CancellationToken ct)
         {
             var user = await _userService.GetByIdAsync(id, ct);
@@ -54,6 +55,7 @@ namespace Tctrieu.VnptIt.Crud.Api.Controllers
 
         // Tạo user mới
         [HttpPost]
+        [Authorize(Policy = Policies.ACTIVE_USER)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<ActionResult<ApiResponse<UserDto>>> Create(
             [FromBody] CreateUserRequest request,
@@ -68,6 +70,7 @@ namespace Tctrieu.VnptIt.Crud.Api.Controllers
 
         // Cập nhật thông tin user
         [HttpPut("{id:int}")]
+        [Authorize(Policy = Policies.ACTIVE_USER)]
         public async Task<ActionResult<ApiResponse<UserDto>>> Update(
             int id,
             [FromBody] UpdateUserRequest request,
@@ -79,6 +82,7 @@ namespace Tctrieu.VnptIt.Crud.Api.Controllers
 
         // Mở khóa tài khoản
         [HttpPatch("{id:int}/activate")]
+        [Authorize(Policy = Policies.ACTIVE_USER)]
         public async Task<ActionResult<ApiResponse<object>>> Activate(int id, CancellationToken ct)
         {
             await _userService.ActivateAsync(id, ct);
@@ -87,6 +91,7 @@ namespace Tctrieu.VnptIt.Crud.Api.Controllers
 
         // Khóa tài khoản
         [HttpPatch("{id:int}/deactivate")]
+        [Authorize(Policy = Policies.ACTIVE_USER)]
         public async Task<ActionResult<ApiResponse<object>>> Deactivate(int id, CancellationToken ct)
         {
             await _userService.DeactivateAsync(id, ct);
@@ -95,6 +100,7 @@ namespace Tctrieu.VnptIt.Crud.Api.Controllers
 
         // Xóa user
         [HttpDelete("{id:int}")]
+        [Authorize(Policy = Policies.ACTIVE_USER)]
         public async Task<ActionResult<ApiResponse<object>>> Delete(int id, CancellationToken ct)
         {
             await _userService.DeleteAsync(id, ct);
